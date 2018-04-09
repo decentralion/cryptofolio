@@ -42,9 +42,9 @@ function getServedPath(appPackageJson) {
 module.exports = {
   dotenv: resolveApp(".env"),
   appBuild: resolveApp("build"),
-  appPublic: resolveApp("src/plugins/artifact/editor/public"),
-  appHtml: resolveApp("src/plugins/artifact/editor/public/index.html"),
-  appIndexJs: resolveApp("src/plugins/artifact/editor/index.js"),
+  appPublic: resolveApp("src/app/public"),
+  appHtml: resolveApp("src/app/index.html"),
+  appIndexJs: resolveApp("src/app/index.js"),
   appPackageJson: resolveApp("package.json"),
   appSrc: resolveApp("src"),
   yarnLockFile: resolveApp("yarn.lock"),
@@ -59,8 +59,6 @@ module.exports = {
   // source file, and the key will be the filename of the bundled entry
   // point within the build directory.
   backendEntryPoints: {
-    fetchAndPrintGithubRepo: resolveApp(
-      "src/plugins/github/bin/fetchAndPrintGithubRepo.js"
-    ),
+    calculateTaxes: resolveApp("src/tax/bin/calculateTaxes.js"),
   },
 };
