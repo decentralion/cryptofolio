@@ -68,3 +68,25 @@ export function validate(tx: Transaction) {
     throw new Error(`Improper type ${tx.type}`);
   }
 }
+
+/** Sort the transactions by date ascending.
+ * When there are multiple transactions on the same date, always put the one
+ * with the highest amount first. This ensures that we process acquisitions
+ * before dispositions, so if we acquire and dispose an asset on the same day,
+ * we won't have ephemeral negative balances due to encountering the
+ * acquisition before the disposal.
+ */
+export function txSort(txs: Transaction[]) {
+  return txs.slice().sort(function(a: Transaction, b: Transaction) {
+    if (a.date.isBefore(b.date)) {
+      return -1;
+    }
+    if (a.date.isSame(b.date)) {
+      if (b.amount.lt(a.amount)) {
+        return -1;
+      }
+      return 1;
+    }
+    return 1;
+  });
+}
