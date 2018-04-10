@@ -18,23 +18,25 @@ describe("capital gains calculation", () => {
       milliseconds: 0,
     });
 
-  function acquireTx(date, amount, price) {
+  function acquireTx(date, amount, price): Transaction {
     return {
       ticker: "FOO",
       amount: Big(amount),
       date,
       price: Big(price),
       type: "TRADE",
+      txSource: "test",
     };
   }
 
-  function disposeTx(date, amount, price) {
+  function disposeTx(date, amount, price): Transaction {
     return {
       ticker: "FOO",
       amount: Big(amount),
       date,
       price: Big(price),
       type: "TRADE",
+      txSource: "test",
     };
   }
 
@@ -87,7 +89,7 @@ describe("capital gains calculation", () => {
         ticker: "FOO",
         acquiredDate: date(2015, 6, 6),
         disposedDate: date(2016, 2, 1),
-        price: Big(1.5),
+        unitProceeds: Big(1.5),
         unitCost: Big(2.0),
         gainsType: "SHORT_TERM",
       },
@@ -96,7 +98,7 @@ describe("capital gains calculation", () => {
         ticker: "FOO",
         acquiredDate: date(2015, 1, 1),
         disposedDate: date(2016, 2, 1),
-        price: Big(1.5),
+        unitProceeds: Big(1.5),
         unitCost: Big(1.0),
         gainsType: "LONG_TERM",
       },
@@ -112,6 +114,7 @@ describe("capital gains calculation", () => {
       amount: Big(100),
       type: "GIFT",
       ticker: "FOO",
+      txSource: "test",
     };
     const gains = calc.dispose(gainsExemptDisposeTx);
     expect(gains).toHaveLength(0);

@@ -14,6 +14,7 @@ describe("transaction typechecking", () => {
       ticker: "FOO",
       date: moment(),
       type: "TRADE",
+      txSource: "test",
     };
     const gift: Transaction = {
       price: Big(1),
@@ -21,6 +22,7 @@ describe("transaction typechecking", () => {
       ticker: "FOO",
       date: moment(),
       type: "GIFT",
+      txSource: "test",
     };
     const fork: Transaction = {
       price: Big(1),
@@ -28,6 +30,7 @@ describe("transaction typechecking", () => {
       ticker: "FOO",
       date: moment(),
       type: "FORK",
+      txSource: "test",
     };
   });
   //  it("invalid transaction types produce flow errors", () => {
@@ -38,6 +41,7 @@ describe("transaction typechecking", () => {
   //      ticker: "FOO",
   //      date: moment(),
   //      type: "BAD",
+  //      txSource: "test",
   //    };
   //  });
 });

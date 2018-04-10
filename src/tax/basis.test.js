@@ -24,6 +24,7 @@ describe("cost basis calculation", () => {
       date: dateFromYear(year),
       price: Big(price),
       type: "TRADE",
+      txSource: "test",
     };
   }
 
@@ -34,6 +35,7 @@ describe("cost basis calculation", () => {
       date: moment(),
       price: Big(100),
       type: "TRADE",
+      txSource: "test",
     };
   }
   it("works in a trivial case", () => {

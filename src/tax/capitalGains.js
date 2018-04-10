@@ -56,7 +56,7 @@ export class CapitalGainsCalculator {
         ticker: this.ticker,
         acquiredDate: f.date,
         disposedDate: tx.date,
-        price: tx.price,
+        unitProceeds: tx.price,
         unitCost: f.unitCost,
         gainsType: isLongTerm ? "LONG_TERM" : "SHORT_TERM",
       };
