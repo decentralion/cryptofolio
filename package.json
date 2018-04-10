@@ -38,6 +38,7 @@
     "lodash.isequal": "^4.5.0",
     "moment": "^2.22.0",
     "object-assign": "4.1.1",
+    "path": "^0.12.7",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "prettier": "^1.10.2",

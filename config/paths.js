@@ -59,6 +59,6 @@ module.exports = {
   // source file, and the key will be the filename of the bundled entry
   // point within the build directory.
   backendEntryPoints: {
-    calculateTaxes: resolveApp("src/tax/bin/calculateTaxes.js"),
+    importCatCSV: resolveApp("src/import/bin/importCatCSV.js"),
   },
 };
