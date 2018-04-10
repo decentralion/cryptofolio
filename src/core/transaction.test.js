@@ -34,17 +34,17 @@ describe("transaction typechecking", () => {
       txSource: "test",
     };
   });
-  //  it("invalid transaction types produce flow errors", () => {
-  //    // if uncommented, this test produces a flow error
-  //    const bad: Transaction = {
-  //      price: Big(1),
-  //      amount: Big(2),
-  //      ticker: "FOO",
-  //      date: moment(),
-  //      type: "BAD",
-  //      txSource: "test",
-  //    };
-  //  });
+  it("invalid transaction types produce flow errors", () => {
+    const bad: Transaction = {
+      price: Big(1),
+      amount: Big(2),
+      ticker: "FOO",
+      date: moment(),
+      //$ExpectError
+      type: "BAD",
+      txSource: "test",
+    };
+  });
 });
 
 describe("txSort", () => {
