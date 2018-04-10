@@ -37,7 +37,7 @@ export type TransactionTypeInfo = {
 };
 
 export const transactionTypes = {
-  FUNDING: {isCapitalGains: false, isIncome: false}, // as when I transfer $10k into Coinbase
+  FUND: {isCapitalGains: false, isIncome: false}, // as when I transfer $10k into Coinbase
   FORK: {isCapitalGains: false, isIncome: true}, // as with Bitcoin Cash
   FEE: {isCapitalGains: false, isIncome: true}, // eg exchange fee
   SPEND: {isCapitalGains: true, isIncome: false}, // buy real world thing w/ crypto
