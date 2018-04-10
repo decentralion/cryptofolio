@@ -50,3 +50,21 @@ export const transactionTypes = {
 (function staticTypeCheck() {
   return (x: $Values<typeof transactionTypes>): TransactionTypeInfo => x;
 });
+
+export function validate(tx: Transaction) {
+  if (
+    tx.ticker.length > 4 ||
+    tx.ticker.length < 3 ||
+    tx.ticker.toUpperCase() !== tx.ticker
+  ) {
+    throw new Error(`Improper ticker ${tx.ticker}`);
+  }
+  const lowDate = moment().set({year: 2009});
+  const highDate = moment().set({year: 2020});
+  if (tx.date.isBefore(lowDate) || tx.date.isAfter(highDate)) {
+    throw new Error(`Improper date ${tx.date.toString()}`);
+  }
+  if (transactionTypes[tx.type] == null) {
+    throw new Error(`Improper type ${tx.type}`);
+  }
+}

@@ -6,6 +6,7 @@ import parse from "csv-parse/lib/sync";
 import {parseNumber, parseDate} from "./parse";
 
 import type {Transaction} from "../core/transaction";
+import {validate} from "../core/transaction";
 
 const TX_SOURCE = "CAT_CSV_IMPORT";
 
@@ -21,7 +22,7 @@ export function parseTransactions(csvData: string) {
       price: parseNumber(r[4]),
       txSource: TX_SOURCE,
     };
-
+    validate(tx);
     return tx;
   });
 }
@@ -46,6 +47,7 @@ export function parseTrades(csvData: string) {
       type: "TRADE",
       txSource: TX_SOURCE,
     };
+    validate(sell);
     transactions.push(sell);
     const buy: Transaction = {
       ticker: dstTicker,
@@ -55,6 +57,7 @@ export function parseTrades(csvData: string) {
       type: "TRADE",
       txSource: TX_SOURCE,
     };
+    validate(buy);
     transactions.push(buy);
   });
   return transactions;
