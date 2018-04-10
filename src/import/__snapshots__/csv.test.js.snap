@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseTrades snapshots as expected 1`] = `
+Array [
+  Object {
+    "amount": "-4000",
+    "date": "2010-09-29T07:00:00.000Z",
+    "price": "1",
+    "ticker": "USD",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "TRADE",
+  },
+  Object {
+    "amount": "1",
+    "date": "2010-09-29T07:00:00.000Z",
+    "price": "4000",
+    "ticker": "BTC",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "TRADE",
+  },
+  Object {
+    "amount": "-2000",
+    "date": "2010-10-01T07:00:00.000Z",
+    "price": "1",
+    "ticker": "USD",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "TRADE",
+  },
+  Object {
+    "amount": "6",
+    "date": "2010-10-01T07:00:00.000Z",
+    "price": "300",
+    "ticker": "ETH",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "TRADE",
+  },
+  Object {
+    "amount": "-600",
+    "date": "2010-10-01T07:00:00.000Z",
+    "price": "1",
+    "ticker": "USD",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "TRADE",
+  },
+  Object {
+    "amount": "2",
+    "date": "2010-10-01T07:00:00.000Z",
+    "price": "300",
+    "ticker": "ETH",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "TRADE",
+  },
+  Object {
+    "amount": "-1000",
+    "date": "2010-10-01T07:00:00.000Z",
+    "price": "1",
+    "ticker": "USD",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "TRADE",
+  },
+  Object {
+    "amount": "20",
+    "date": "2010-10-01T07:00:00.000Z",
+    "price": "50",
+    "ticker": "LTC",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "TRADE",
+  },
+]
+`;
+
+exports[`parseTransactions snapshots as expected 1`] = `
+Array [
+  Object {
+    "amount": "2.0101",
+    "date": "2010-01-01T08:00:00.000Z",
+    "price": "250",
+    "ticker": "BTC",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "FUND",
+  },
+  Object {
+    "amount": "2.0101",
+    "date": "2017-08-01T07:00:00.000Z",
+    "price": "500",
+    "ticker": "BCH",
+    "txSource": "CAT_CSV_IMPORT",
+    "type": "FORK",
+  },
+]
+`;
