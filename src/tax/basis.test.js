@@ -29,9 +29,10 @@ describe("cost basis calculation", () => {
   }
 
   function disposeTx(amount) {
+    // DisposeTX always has a negative amount
     return {
       ticker: "FOO",
-      amount: Big(amount),
+      amount: Big(amount).times(-1),
       date: moment(),
       price: Big(100),
       type: "TRADE",
@@ -45,6 +46,21 @@ describe("cost basis calculation", () => {
     expect(results).toEqual([
       {amount: Big(1), unitCost: Big(100), date: dateFromYear(1990)},
     ]);
+  });
+
+  it("Disposing positive amounts is not allowed", () => {
+    const calc = new LIFOCostBasisCalculator("FOO");
+    calc.acquire(acquireTx(1990, 1, 100));
+    const disposal = disposeTx(1);
+    disposal.amount = Big(1);
+    expect(() => calc.dispose(disposal)).toThrow("positive amount");
+  });
+
+  it("Acquiring negative amounts is not allowed", () => {
+    const calc = new LIFOCostBasisCalculator("FOO");
+    const acq = acquireTx(1990, 1, 100);
+    acq.amount = Big(-1);
+    expect(() => calc.acquire(acq)).toThrow("negative amount");
   });
 
   it("uses LIFO semantics", () => {

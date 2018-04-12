@@ -32,6 +32,11 @@ export class LIFOCostBasisCalculator {
       throw new Error(`LIFOCostBasisCalculator with ticker
         ${this.ticker} tried to process transaction with ticker ${tx.ticker}`);
     }
+    if (tx.amount.lt(0)) {
+      throw new Error(
+        `Tried to acquire negative amount ${tx.amount.toString()}`
+      );
+    }
     const frame = {amount: tx.amount, unitCost: tx.price, date: tx.date};
     this.frames.push(frame);
   }
@@ -45,7 +50,12 @@ export class LIFOCostBasisCalculator {
           `${this.ticker} tried to process transaction with ticker ${tx.ticker}`
       );
     }
-    let remainToBeSold = tx.amount;
+    if (tx.amount.gt(0)) {
+      throw new Error(
+        `Tried to dispose positive amount ${tx.amount.toString()}`
+      );
+    }
+    let remainToBeSold = tx.amount.times(-1);
     let basisFrames = [];
     while (remainToBeSold.gt(0)) {
       if (this.frames.length === 0) {

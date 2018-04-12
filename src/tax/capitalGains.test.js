@@ -32,7 +32,7 @@ describe("capital gains calculation", () => {
   function disposeTx(date, amount, price): Transaction {
     return {
       ticker: "FOO",
-      amount: Big(amount),
+      amount: Big(amount).times(-1),
       date,
       price: Big(price),
       type: "TRADE",
@@ -111,7 +111,7 @@ describe("capital gains calculation", () => {
     const gainsExemptDisposeTx: Transaction = {
       date: date(2015, 1, 2),
       price: Big(10),
-      amount: Big(100),
+      amount: Big(-100),
       type: "GIFT",
       ticker: "FOO",
       txSource: "test",
