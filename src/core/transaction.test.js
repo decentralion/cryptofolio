@@ -4,7 +4,7 @@ import moment from "moment";
 import Big from "big.js";
 
 import type {Transaction} from "./transaction";
-import {txSort} from "./transaction";
+import {txSort, fromJSON} from "./transaction";
 
 describe("transaction typechecking", () => {
   it("can construct transaction for various transaction types", () => {
@@ -47,8 +47,8 @@ describe("transaction typechecking", () => {
   });
 });
 
-describe("txSort", () => {
-  it("sorts by date ascending, and amount descending on collisions", () => {
+describe("methods:", () => {
+  it("txSort sorts by date ascending, and amount descending on collisions", () => {
     function makeTx(year, amount): Transaction {
       return {
         date: moment().set({
@@ -77,5 +77,24 @@ describe("txSort", () => {
 
     expect(txSort([tx1, tx2, tx3, tx4, tx0])).toEqual(expected);
     expect(txSort([tx4, tx3, tx2, tx1, tx0])).toEqual(expected);
+  });
+  it("fromJSON works", () => {
+    const tx1: Transaction = {
+      amount: Big(33),
+      price: Big(102.1),
+      ticker: "FOO",
+      type: "FORK",
+      txSource: "test",
+      date: moment(),
+    };
+
+    const stringified = JSON.stringify(tx1);
+    const tx2 = fromJSON(JSON.parse(JSON.stringify(tx1)));
+    expect(tx2.amount.eq(tx1.amount)).toBe(true);
+    expect(tx2.price.eq(tx1.price)).toBe(true);
+    expect(tx2.date.isSame(tx1.date)).toBe(true);
+    expect(tx2.type).toEqual(tx1.type);
+    expect(tx2.ticker).toEqual(tx1.ticker);
+    expect(tx2.txSource).toEqual(tx1.txSource);
   });
 });

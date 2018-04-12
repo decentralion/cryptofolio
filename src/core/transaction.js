@@ -69,6 +69,24 @@ export function validate(tx: Transaction) {
   }
 }
 
+export function fromJSON(x: any): Transaction {
+  const price = new Big(x.price);
+  const tx: Transaction = {
+    date: moment(x.date),
+    amount: Big(x.amount),
+    price: Big(x.price),
+    ticker: x.ticker,
+    type: x.type,
+    txSource: x.txSource,
+  };
+  Object.keys(tx).forEach((k) => {
+    if (tx[k] == null) {
+      throw new Error(`tx ${JSON.stringify(tx)} had a null property`);
+    }
+  });
+  return tx;
+}
+
 /** Sort the transactions by date ascending.
  * When there are multiple transactions on the same date, always put the one
  * with the highest amount first. This ensures that we process acquisitions
