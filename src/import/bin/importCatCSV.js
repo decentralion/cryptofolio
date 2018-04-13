@@ -33,19 +33,21 @@ function parseArgs() {
 function main() {
   const args = parseArgs();
   const dataDirectory = args.dataDirectory;
-  const txFile = path.join(dataDirectory, "cat_import", "transactions.csv")
-  const trFile = path.join(dataDirectory, "cat_import", "trades.csv")
+  const txFile = path.join(dataDirectory, "cat_import", "transactions.csv");
+  const trFile = path.join(dataDirectory, "cat_import", "trades.csv");
   const txContents = fs.readFileSync(txFile);
   const trContents = fs.readFileSync(trFile);
   const transactions = parseTransactions(txContents);
   const trades = parseTrades(trContents);
-  console.log(`Parsed ${transactions.length} transactions and ${trades.length} trades`)
+  console.log(
+    `Parsed ${transactions.length} transactions and ${trades.length} trades`
+  );
 
   const allTxSorted = txSort(transactions.concat(trades));
   const txOutputFile = path.join(dataDirectory, "transactions", "cat.json");
   const output = stringify(allTxSorted, {space: 2});
   fs.writeFileSync(txOutputFile, output);
-  console.log(`Wrote ${allTxSorted.length} transactions to ${txOutputFile}`)
+  console.log(`Wrote ${allTxSorted.length} transactions to ${txOutputFile}`);
 }
 
 main();

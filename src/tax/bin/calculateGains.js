@@ -27,10 +27,12 @@ function parseArgs() {
 function main() {
   const args = parseArgs();
   const accumulator = new TaxAccumulator();
-  let transactions = JSON.parse(fs.readFileSync(args.dataFile, {encoding: 'utf-8'})).map(fromJSON);
+  let transactions = JSON.parse(
+    fs.readFileSync(args.dataFile, {encoding: "utf-8"})
+  ).map(fromJSON);
   transactions = txSort(transactions);
   transactions.forEach((tx) => accumulator.process(tx));
-  console.log(stringify( accumulator.gains , {space: 2}));
+  console.log(stringify(accumulator.gains, {space: 2}));
 }
 
 main();
