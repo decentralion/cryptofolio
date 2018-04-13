@@ -60,6 +60,6 @@ module.exports = {
   // point within the build directory.
   backendEntryPoints: {
     importCatCSV: resolveApp("src/import/bin/importCatCSV.js"),
-    calculateTaxes: resolveApp("src/tax/bin/calculateTaxes.js"),
+    calculateGains: resolveApp("src/tax/bin/calculateGains.js"),
   },
 };
