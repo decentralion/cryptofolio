@@ -11,6 +11,9 @@ describe("parseNumber", () => {
     expect(parseNumber(5)).toEqual(Big("5"));
   });
 
+  it("Throws error on empty string", () => {
+    expect(() => parseNumber("")).toThrow("empty string");
+  });
   it("handles simple string cases", () => {
     expect(parseNumber("0.1")).toEqual(Big("0.1"));
     expect(parseNumber("5")).toEqual(Big("5"));
@@ -45,6 +48,9 @@ describe("parseDate", () => {
       millisecond: 0,
     });
   }
+  it("Throws error on empty string", () => {
+    expect(() => parseDate("")).toThrow("empty string");
+  });
   it("parses slash dates", () => {
     expect(parseDate("04/03/2015").isSame(momentOnDate(2015, 4, 3))).toBe(true);
   });
