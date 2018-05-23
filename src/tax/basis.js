@@ -1,5 +1,6 @@
 // @flow
 
+import stringify from "json-stable-stringify";
 import moment from "moment";
 import Big from "big.js";
 import type {Transaction} from "../core/transaction";
@@ -61,7 +62,7 @@ export class LIFOCostBasisCalculator {
       if (this.frames.length === 0) {
         throw new Error(
           `Attempted to dispose ${remainToBeSold.toString()} ` +
-            `${this.ticker}, but none remained`
+            `${this.ticker}, but none remained. TX: ${stringify(tx)}`
         );
       }
       let nextFrame = this.frames[this.frames.length - 1];
