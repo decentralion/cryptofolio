@@ -25,11 +25,15 @@ export function parseDate(x: string) {
   if (x === "") {
     throw new Error("Tried to parse empty string");
   }
-  x = x.replace(/\//g, "-");
-  if (!x.match(/\d+-\d+-\d+/)) {
-    throw new Error(`${x} doesn't look like a date`);
+  const xc = x.replace(/\//g, "-");
+  if (!xc.match(/\d+-\d+-\d+/)) {
+    throw new Error(`${xc} doesn't look like a date`);
   }
-  const date = moment(x, "MM-DD-YYYY");
+  const date = moment(xc, "MM-DD-YYYY");
+
+  if (!date.isValid()) {
+    throw new Error(`Invalid moment from ${x} (cleaned to ${xc})`);
+  }
 
   return date;
 }

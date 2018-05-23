@@ -57,7 +57,10 @@ describe("parseDate", () => {
   it("parses dash dates", () => {
     expect(parseDate("04-03-2015").isSame(momentOnDate(2015, 4, 3))).toBe(true);
   });
-  it("errors on bad dates", () => {
-    expect(() => parseDate("")).toThrow();
+  it("errors on empty dates", () => {
+    expect(() => parseDate("")).toThrow("empty string");
+  });
+  it("errors on invalid dates", () => {
+    expect(() => parseDate("2000/15/15")).toThrow("Invalid");
   });
 });
