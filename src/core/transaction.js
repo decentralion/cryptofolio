@@ -1,5 +1,6 @@
 // @flow
 
+import stringify from "json-stable-stringify";
 import moment from "moment";
 import Big from "big.js";
 
@@ -52,6 +53,11 @@ export const transactionTypes = {
 });
 
 export function validate(tx: Transaction) {
+  Object.keys(tx).forEach((k) => {
+    if (tx[k] == null) {
+      throw new Error(`${k} is null on tx: ${stringify(tx)}`);
+    }
+  });
   if (
     tx.ticker.length > 4 ||
     tx.ticker.length < 3 ||
@@ -61,8 +67,11 @@ export function validate(tx: Transaction) {
   }
   const lowDate = moment().set({year: 2009});
   const highDate = moment().set({year: 2020});
+  if (!tx.date.isValid()) {
+    throw new Error(`Invalid date ${tx.date.toString()}`);
+  }
   if (tx.date.isBefore(lowDate) || tx.date.isAfter(highDate)) {
-    throw new Error(`Improper date ${tx.date.toString()}`);
+    throw new Error(`Unrealistic date ${tx.date.toString()}`);
   }
   if (transactionTypes[tx.type] == null) {
     throw new Error(`Improper type ${tx.type}`);
@@ -79,11 +88,7 @@ export function fromJSON(x: any): Transaction {
     type: x.type,
     txSource: x.txSource,
   };
-  Object.keys(tx).forEach((k) => {
-    if (tx[k] == null) {
-      throw new Error(`tx ${JSON.stringify(tx)} had a null property`);
-    }
-  });
+  validate(tx);
   return tx;
 }
 
